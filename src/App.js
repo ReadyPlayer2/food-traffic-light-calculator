@@ -54,6 +54,7 @@ class App extends Component {
     return (
       // RENDER TRAFFIC LIGHTS RESULTS HERE
       <div>
+        <p>Each 100g portion contains:</p>
         <ul>
           {this.crunchEnergy()}
           {this.crunchFat()}
@@ -66,49 +67,61 @@ class App extends Component {
   }
 
   crunchEnergy() {
-    let dailyRecommended = 2500;
+    let dailyRecommended = 2000;
     let dailyPercentage =  ((this.state.lastResult.normalenergy / dailyRecommended) * 100).toFixed(1);
 
-    return <li>{dailyPercentage}%</li>
+    return <li className='white'>{this.state.lastResult.normalenergy}kcal ({dailyPercentage}%)</li>
   }
 
   crunchFat() {
+    let dailyRecommended = 70;
+    let dailyPercentage =  ((this.state.lastResult.normalfat / dailyRecommended) * 100).toFixed(1);
+
     if (this.state.lastResult.normalfat <= 3.0) {
-      return <li className='green'>{this.state.lastResult.normalfat}</li>
+      return <li className='green'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
     } else if (this.state.lastResult.normalfat <= 17.5) {
-      return <li className='orange'>{this.state.lastResult.normalfat}</li>
+      return <li className='orange'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
     } else {
-      return <li className='red'>{this.state.lastResult.normalfat}</li>
+      return <li className='red'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
     }
   }
 
   crunchSaturates() {
+    let dailyRecommended = 20;
+    let dailyPercentage =  ((this.state.lastResult.normalsaturates / dailyRecommended) * 100).toFixed(1);
+
     if (this.state.lastResult.normalsaturates <= 1.5) {
-      return <li className='green'>{this.state.lastResult.normalsaturates}</li>
+      return <li className='green'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
     } else if (this.state.lastResult.normalsaturates <= 5.0) {
-      return <li className='orange'>{this.state.lastResult.normalsaturates}</li>
+      return <li className='orange'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
     } else {
-      return <li className='red'>{this.state.lastResult.normalsaturates}</li>
+      return <li className='red'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
     }
   }
 
   crunchSugars() {
+    let dailyRecommended = 90;
+    let dailyPercentage =  ((this.state.lastResult.normalsugars / dailyRecommended) * 100).toFixed(1);
+
     if (this.state.lastResult.normalsugars <= 5.0) {
-      return <li className='green'>{this.state.lastResult.normalsugars}</li>
+      return <li className='green'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
     } else if (this.state.lastResult.normalsugars <= 22.5) {
-      return <li className='orange'>{this.state.lastResult.normalsugars}</li>
+      return <li className='orange'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
     } else {
-      return <li className='red'>{this.state.lastResult.normalsugars}</li>
+      return <li className='red'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
     }
   }
 
   crunchSalt() {
+    let dailyRecommended = 6;
+    let dailyPercentage =  ((this.state.lastResult.normalsalt / dailyRecommended) * 100).toFixed(1);
+
     if (this.state.lastResult.normalsalt <= 0.3) {
-      return <li className='green'>{this.state.lastResult.normalsalt}</li>
+      return <li className='green'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
     } else if (this.state.lastResult.normalsalt <= 1.5) {
-      return <li className='orange'>{this.state.lastResult.normalsalt}</li>
+      return <li className='orange'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
     } else {
-      return <li className='red'>{this.state.lastResult.normalsalt}</li>
+      return <li className='red'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
     }
   }
 
@@ -117,11 +130,11 @@ class App extends Component {
     
     // normalised values (for 100grams)
     const resultObj = {
-      normalenergy: this.state.energy * multiplier,
-      normalfat: (this.state.fat * multiplier).toPrecision(2),
-      normalsaturates: (this.state.saturates * multiplier).toPrecision(2),
-      normalsugars: (this.state.sugars * multiplier).toPrecision(2),
-      normalsalt: (this.state.salt * multiplier).toPrecision(2)
+      normalenergy: (this.state.energy * multiplier).toFixed(0),
+      normalfat: (this.state.fat * multiplier).toFixed(1),
+      normalsaturates: (this.state.saturates * multiplier).toFixed(1),
+      normalsugars: (this.state.sugars * multiplier).toFixed(1),
+      normalsalt: (this.state.salt * multiplier).toFixed(1)
     }
 
     this.setState({
@@ -149,32 +162,32 @@ class App extends Component {
         <div className='App-content'>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Weight:
+              Weight (g):
               <input type="text" name="weight" onChange={this.handleChange} />
             </label>
             <br></br>
             <label>
-              Energy:
+              Energy (kcal):
               <input type="text" name="energy" onChange={this.handleChange} />
             </label>
             <br></br>
             <label>
-              Fat:
+              Total Fat (g):
               <input type="text" name="fat" onChange={this.handleChange} />
             </label>
             <br></br>
             <label>
-              Saturates:
+              Saturates (g):
               <input type="text" name="saturates" onChange={this.handleChange} />
             </label>
             <br></br>
             <label>
-              Sugars:
+              Sugars (g):
               <input type="text" name="sugars" onChange={this.handleChange} />
             </label>
             <br></br>
             <label>
-              Salt:
+              Salt (g):
               <input type="text" name="salt" onChange={this.handleChange} />
             </label>
             <br></br>
