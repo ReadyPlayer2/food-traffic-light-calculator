@@ -118,10 +118,10 @@ class App extends Component {
     // normalised values (for 100grams)
     const resultObj = {
       normalenergy: this.state.energy * multiplier,
-      normalfat: (this.state.fat * multiplier).toPrecision(2),
-      normalsaturates: (this.state.saturates * multiplier).toPrecision(2),
-      normalsugars: (this.state.sugars * multiplier).toPrecision(2),
-      normalsalt: (this.state.salt * multiplier).toPrecision(2)
+      normalfat: (this.state.fat * multiplier).toFixed(1),
+      normalsaturates: (this.state.saturates * multiplier).toFixed(1),
+      normalsugars: (this.state.sugars * multiplier).toFixed(1),
+      normalsalt: (this.state.salt * multiplier).toFixed(1)
     }
 
     this.setState({
