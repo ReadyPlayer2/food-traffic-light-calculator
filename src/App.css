@@ -28,17 +28,54 @@
 }
 
 .green {
-  color: green;
+  color: white;
+  background-color: green;
 }
 
 .orange {
-  color: orange;
+  color: white;
+  background-color: orange;
 }
 
 .red {
-  color: red;
+  color: white;
+  background-color: red;
 }
 
 .white {
-  color: white;
+  color: black;
+  background-color: white;
+}
+
+.traffic-light-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  padding: 5px;
+  margin-top: 5px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  line-height: 50px;
+  font-size: 15px;
+  text-align: center;
+}
+
+label {
+  line-height: 25px;
+  font-size: 15px;
+  text-align: center;
+}
+
+input[type="number"] {
+  margin-left: 5px;
+  border-radius: 5px;
+  width: 75px;
+  height: 25px;
 }

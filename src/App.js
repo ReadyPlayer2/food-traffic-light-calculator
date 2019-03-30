@@ -40,7 +40,7 @@ class App extends Component {
       this.isNormalFloat(this.state.sugars) &&
       this.isNormalFloat(this.state.salt)) {
 
-      this.crunchNumbers();
+      this.normaliseInput();
     }
 
     event.preventDefault();
@@ -55,7 +55,7 @@ class App extends Component {
       // RENDER TRAFFIC LIGHTS RESULTS HERE
       <div>
         <p>Each 100g portion contains:</p>
-        <ul>
+        <ul className='traffic-light-container'>
           {this.crunchEnergy()}
           {this.crunchFat()}
           {this.crunchSaturates()}
@@ -73,59 +73,36 @@ class App extends Component {
     return <li className='white'>{this.state.lastResult.normalenergy}kcal ({dailyPercentage}%)</li>
   }
 
-  crunchFat() {
-    let dailyRecommended = 70;
-    let dailyPercentage =  ((this.state.lastResult.normalfat / dailyRecommended) * 100).toFixed(1);
+  // returns a <li /> of the correct class based on value
+  crunchItem(value, dailyRecommended, greenMax, orangeMax) {
+    let dailyPercentage =  ((value / dailyRecommended) * 100).toFixed(1);
 
-    if (this.state.lastResult.normalfat <= 3.0) {
-      return <li className='green'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
-    } else if (this.state.lastResult.normalfat <= 17.5) {
-      return <li className='orange'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
+    if (value <= greenMax) {
+      return <li className='green'>{value}g ({dailyPercentage}%)</li>
+    } else if (value <= orangeMax) {
+      return <li className='orange'>{value}g ({dailyPercentage}%)</li>
     } else {
-      return <li className='red'>{this.state.lastResult.normalfat}g ({dailyPercentage}%)</li>
+      return <li className='red'>{value}g ({dailyPercentage}%)</li>
     }
+  }
+
+  crunchFat() {
+    return this.crunchItem(this.state.lastResult.normalfat, 70, 3.0, 17.5);
   }
 
   crunchSaturates() {
-    let dailyRecommended = 20;
-    let dailyPercentage =  ((this.state.lastResult.normalsaturates / dailyRecommended) * 100).toFixed(1);
-
-    if (this.state.lastResult.normalsaturates <= 1.5) {
-      return <li className='green'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
-    } else if (this.state.lastResult.normalsaturates <= 5.0) {
-      return <li className='orange'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
-    } else {
-      return <li className='red'>{this.state.lastResult.normalsaturates}g ({dailyPercentage}%)</li>
-    }
+    return this.crunchItem(this.state.lastResult.normalsaturates, 20, 1.5, 5.0);
   }
 
   crunchSugars() {
-    let dailyRecommended = 90;
-    let dailyPercentage =  ((this.state.lastResult.normalsugars / dailyRecommended) * 100).toFixed(1);
-
-    if (this.state.lastResult.normalsugars <= 5.0) {
-      return <li className='green'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
-    } else if (this.state.lastResult.normalsugars <= 22.5) {
-      return <li className='orange'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
-    } else {
-      return <li className='red'>{this.state.lastResult.normalsugars}g ({dailyPercentage}%)</li>
-    }
+    return this.crunchItem(this.state.lastResult.normalsugars, 90, 5.0, 22.5);
   }
 
   crunchSalt() {
-    let dailyRecommended = 6;
-    let dailyPercentage =  ((this.state.lastResult.normalsalt / dailyRecommended) * 100).toFixed(1);
-
-    if (this.state.lastResult.normalsalt <= 0.3) {
-      return <li className='green'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
-    } else if (this.state.lastResult.normalsalt <= 1.5) {
-      return <li className='orange'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
-    } else {
-      return <li className='red'>{this.state.lastResult.normalsalt}g ({dailyPercentage}%)</li>
-    }
+    return this.crunchItem(this.state.lastResult.normalsalt, 6, 0.3, 1.5);
   }
 
-  crunchNumbers() {
+  normaliseInput() {
     let multiplier = 100 / this.state.weight;
     
     // normalised values (for 100grams)
@@ -162,33 +139,33 @@ class App extends Component {
         <div className='App-content'>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Weight (g):
-              <input type="text" name="weight" onChange={this.handleChange} />
+              Weight:
+              <input type="number" name="weight" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Energy (kcal):
-              <input type="text" name="energy" onChange={this.handleChange} />
+              Energy:
+              <input type="number" name="energy" onChange={this.handleChange} min='0.0' step='0.1' placeholder='kcal'/>
             </label>
             <br></br>
             <label>
-              Total Fat (g):
-              <input type="text" name="fat" onChange={this.handleChange} />
+              Total Fat:
+              <input type="number" name="fat" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Saturates (g):
-              <input type="text" name="saturates" onChange={this.handleChange} />
+              Saturates:
+              <input type="number" name="saturates" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Sugars (g):
-              <input type="text" name="sugars" onChange={this.handleChange} />
+              Sugars:
+              <input type="number" name="sugars" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Salt (g):
-              <input type="text" name="salt" onChange={this.handleChange} />
+              Salt:
+              <input type="number" name="salt" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <input type="submit" value="crunch" />
