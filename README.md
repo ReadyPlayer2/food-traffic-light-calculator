@@ -1,4 +1,4 @@
-A simple application to allow users to the enter the details of a food product direct from packaging to produce the traffic light ratings based on UK guidance.
+A simple application to allow users to the enter the details of a food product direct from packaging to produce the traffic light ratings based on [UK guidance](https://www.nutrition.org.uk/healthyliving/helpingyoueatwell/324-labels.html?start=3).
 
 
 
