@@ -140,32 +140,32 @@ class App extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Weight:
-              <input type="number" name="weight" onChange={this.handleChange} min='0.0' placeholder='grams'/>
+              <input type="number" name="weight" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
               Energy:
-              <input type="number" name="energy" onChange={this.handleChange} min='0.0' placeholder='kcal'/>
+              <input type="number" name="energy" onChange={this.handleChange} min='0.0' step='0.1' placeholder='kcal'/>
             </label>
             <br></br>
             <label>
               Total Fat:
-              <input type="number" name="fat" onChange={this.handleChange} min='0.0' placeholder='grams'/>
+              <input type="number" name="fat" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
               Saturates:
-              <input type="number" name="saturates" onChange={this.handleChange} min='0.0' placeholder='grams'/>
+              <input type="number" name="saturates" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
               Sugars:
-              <input type="number" name="sugars" onChange={this.handleChange} min='0.0' placeholder='grams'/>
+              <input type="number" name="sugars" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <label>
               Salt:
-              <input type="number" name="salt" onChange={this.handleChange} min='0.0' placeholder='grams'/>
+              <input type="number" name="salt" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams'/>
             </label>
             <br></br>
             <input type="submit" value="crunch" />
