@@ -66,7 +66,7 @@ class App extends Component {
   }
 
   crunchEnergy() {
-    let dailyRecommended = 2500;
+    let dailyRecommended = 2000;
     let dailyPercentage =  ((this.state.lastResult.normalenergy / dailyRecommended) * 100).toFixed(1);
 
     return <li>{dailyPercentage}%</li>
