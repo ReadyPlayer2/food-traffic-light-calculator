@@ -46,16 +46,86 @@ class App extends Component {
     event.preventDefault();
   }
 
-  getResults() {
+  renderTrafficLights() {
+    if (this.state.lastResult === '-') {
+      return
+    }
+
     return (
       // RENDER TRAFFIC LIGHTS RESULTS HERE
-      <h2>{this.state.lastResult}</h2>
+      <div>
+        <ul>
+          {this.crunchEnergy()}
+          {this.crunchFat()}
+          {this.crunchSaturates()}
+          {this.crunchSugars()}
+          {this.crunchSalt()}
+        </ul>
+      </div>
     )
   }
 
+  crunchEnergy() {
+    let dailyRecommended = 2500;
+    let dailyPercentage =  ((this.state.lastResult.normalenergy / dailyRecommended) * 100).toFixed(1);
+
+    return <li>{dailyPercentage}%</li>
+  }
+
+  crunchFat() {
+    if (this.state.lastResult.normalfat <= 3.0) {
+      return <li className='green'>{this.state.lastResult.normalfat}</li>
+    } else if (this.state.lastResult.normalfat <= 17.5) {
+      return <li className='orange'>{this.state.lastResult.normalfat}</li>
+    } else {
+      return <li className='red'>{this.state.lastResult.normalfat}</li>
+    }
+  }
+
+  crunchSaturates() {
+    if (this.state.lastResult.normalsaturates <= 1.5) {
+      return <li className='green'>{this.state.lastResult.normalsaturates}</li>
+    } else if (this.state.lastResult.normalsaturates <= 5.0) {
+      return <li className='orange'>{this.state.lastResult.normalsaturates}</li>
+    } else {
+      return <li className='red'>{this.state.lastResult.normalsaturates}</li>
+    }
+  }
+
+  crunchSugars() {
+    if (this.state.lastResult.normalsugars <= 5.0) {
+      return <li className='green'>{this.state.lastResult.normalsugars}</li>
+    } else if (this.state.lastResult.normalsugars <= 22.5) {
+      return <li className='orange'>{this.state.lastResult.normalsugars}</li>
+    } else {
+      return <li className='red'>{this.state.lastResult.normalsugars}</li>
+    }
+  }
+
+  crunchSalt() {
+    if (this.state.lastResult.normalsalt <= 0.3) {
+      return <li className='green'>{this.state.lastResult.normalsalt}</li>
+    } else if (this.state.lastResult.normalsalt <= 1.5) {
+      return <li className='orange'>{this.state.lastResult.normalsalt}</li>
+    } else {
+      return <li className='red'>{this.state.lastResult.normalsalt}</li>
+    }
+  }
+
   crunchNumbers() {
+    let multiplier = 100 / this.state.weight;
+    
+    // normalised values (for 100grams)
+    const resultObj = {
+      normalenergy: this.state.energy * multiplier,
+      normalfat: (this.state.fat * multiplier).toPrecision(2),
+      normalsaturates: (this.state.saturates * multiplier).toPrecision(2),
+      normalsugars: (this.state.sugars * multiplier).toPrecision(2),
+      normalsalt: (this.state.salt * multiplier).toPrecision(2)
+    }
+
     this.setState({
-      lastResult: ['array', 'of values to', 'be displayed']
+      lastResult: resultObj
     })
   }
 
@@ -109,7 +179,7 @@ class App extends Component {
             </label>
             <br></br>
             <input type="submit" value="crunch" />
-            {this.getResults()}
+            {this.renderTrafficLights()}
           </form>
         </div>
       </div>
