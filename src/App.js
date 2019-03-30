@@ -139,33 +139,33 @@ class App extends Component {
         <div className='App-content'>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Weight (g):
-              <input type="text" name="weight" onChange={this.handleChange} />
+              Weight:
+              <input type="number" name="weight" onChange={this.handleChange} min='0.0' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Energy (kcal):
-              <input type="text" name="energy" onChange={this.handleChange} />
+              Energy:
+              <input type="number" name="energy" onChange={this.handleChange} min='0.0' placeholder='kcal'/>
             </label>
             <br></br>
             <label>
-              Total Fat (g):
-              <input type="text" name="fat" onChange={this.handleChange} />
+              Total Fat:
+              <input type="number" name="fat" onChange={this.handleChange} min='0.0' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Saturates (g):
-              <input type="text" name="saturates" onChange={this.handleChange} />
+              Saturates:
+              <input type="number" name="saturates" onChange={this.handleChange} min='0.0' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Sugars (g):
-              <input type="text" name="sugars" onChange={this.handleChange} />
+              Sugars:
+              <input type="number" name="sugars" onChange={this.handleChange} min='0.0' placeholder='grams'/>
             </label>
             <br></br>
             <label>
-              Salt (g):
-              <input type="text" name="salt" onChange={this.handleChange} />
+              Salt:
+              <input type="number" name="salt" onChange={this.handleChange} min='0.0' placeholder='grams'/>
             </label>
             <br></br>
             <input type="submit" value="crunch" />
