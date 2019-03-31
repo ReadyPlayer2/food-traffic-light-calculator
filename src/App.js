@@ -137,7 +137,7 @@ class App extends Component {
         </header>
 
         <div className='App-content'>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} autoComplete='off'>
             <label>
               Weight:
               <input type="number" name="weight" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
