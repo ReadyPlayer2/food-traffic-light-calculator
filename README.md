@@ -3,4 +3,5 @@ A simple application to allow users to the enter the details of a food product d
 
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ---
