@@ -144,7 +144,7 @@ class App extends Component {
         </header>
 
         <div className='App-content'>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} autoComplete='off'>
             {this.renderLabel('Weight', 'weight', 'grams')}
             <br></br>
             {this.renderLabel('Energy', 'energy', 'kcal')}
