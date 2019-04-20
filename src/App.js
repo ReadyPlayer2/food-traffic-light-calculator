@@ -68,14 +68,14 @@ class App extends Component {
 
   crunchEnergy() {
     let dailyRecommended = 2000;
-    let dailyPercentage =  ((this.state.lastResult.normalenergy / dailyRecommended) * 100).toFixed(1);
+    let dailyPercentage = ((this.state.lastResult.normalenergy / dailyRecommended) * 100).toFixed(1);
 
     return <li className='white'>{this.state.lastResult.normalenergy}kcal ({dailyPercentage}%)</li>
   }
 
   // returns a <li /> of the correct class based on value
   crunchItem(value, dailyRecommended, greenMax, orangeMax) {
-    let dailyPercentage =  ((value / dailyRecommended) * 100).toFixed(1);
+    let dailyPercentage = ((value / dailyRecommended) * 100).toFixed(1);
 
     if (value <= greenMax) {
       return <li className='green'>{value}g ({dailyPercentage}%)</li>
@@ -104,7 +104,7 @@ class App extends Component {
 
   normaliseInput() {
     let multiplier = 100 / this.state.weight;
-    
+
     // normalised values (for 100grams)
     const resultObj = {
       normalenergy: (this.state.energy * multiplier).toFixed(0),
@@ -119,6 +119,13 @@ class App extends Component {
     })
   }
 
+  renderLabel(displayName, name, placeholder) {
+    return (
+      <label>{displayName}:
+        <input type="number" name={name} onChange={this.handleChange} min='0.0' step='0.1' placeholder={placeholder} required />
+      </label>
+    )
+  }
 
   render() {
     return (
@@ -138,35 +145,17 @@ class App extends Component {
 
         <div className='App-content'>
           <form onSubmit={this.handleSubmit}>
-            <label>
-              Weight:
-              <input type="number" name="weight" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
-            </label>
+            {this.renderLabel('Weight', 'weight', 'grams')}
             <br></br>
-            <label>
-              Energy:
-              <input type="number" name="energy" onChange={this.handleChange} min='0.0' step='0.1' placeholder='kcal' required/>
-            </label>
+            {this.renderLabel('Energy', 'energy', 'kcal')}
             <br></br>
-            <label>
-              Total Fat:
-              <input type="number" name="fat" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
-            </label>
+            {this.renderLabel('Total Fat', 'fat', 'grams')}
             <br></br>
-            <label>
-              Saturates:
-              <input type="number" name="saturates" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
-            </label>
+            {this.renderLabel('Saturates', 'saturates', 'grams')}
             <br></br>
-            <label>
-              Sugars:
-              <input type="number" name="sugars" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
-            </label>
+            {this.renderLabel('Sugars', 'sugars', 'grams')}
             <br></br>
-            <label>
-              Salt:
-              <input type="number" name="salt" onChange={this.handleChange} min='0.0' step='0.1' placeholder='grams' required/>
-            </label>
+            {this.renderLabel('Salt', 'salt', 'grams')}
             <br></br>
             <input type="submit" value="crunch" />
             {this.renderTrafficLights()}
